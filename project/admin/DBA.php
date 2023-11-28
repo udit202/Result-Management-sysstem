@@ -11,9 +11,15 @@ require 'php/Db.php';
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
 <style>
     .maincontainer {
@@ -32,6 +38,16 @@ require 'php/Db.php';
         border: 2px solid navy;
         border-radius: 5px;
         background-color: white;
+        overflow: scroll;
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 25px;
     }
 
     .menu_div>div {
@@ -54,7 +70,7 @@ require 'php/Db.php';
         margin-top: 30px;
         text-align: left;
         border: 1px solid navy;
-        border-radius: 5px;
+        border-radius: 25px;
         background-color: transparent;
         padding: 5px 7px;
     }
@@ -122,6 +138,7 @@ require 'php/Db.php';
     .home {
         display: block;
     }
+
     .closebtn {
         text-align: right;
     }
@@ -133,6 +150,7 @@ require 'php/Db.php';
     .close_div {
         display: none;
     }
+
     .add_modal {
         position: absolute;
         top: 0px;
@@ -159,8 +177,11 @@ require 'php/Db.php';
         border-radius: 5px;
     }
 
-    
-    .add_emp {
+
+    .add_emp,
+    .Req_del,
+    .Emp_up,
+    .Emp_del {
         margin: 5px;
         background-color: white;
         color: navy;
@@ -170,7 +191,10 @@ require 'php/Db.php';
         border-radius: 25px;
     }
 
-    .add_emp:hover {
+    .add_emp:hover,
+    .Req_del:hover,
+    .Emp_up:hover,
+    .Emp_del:hover {
         background-color: navy;
         color: white;
     }
@@ -189,38 +213,47 @@ require 'php/Db.php';
         background-color: navy;
         color: white;
     }
-    .add_Emp_modal{
+
+    .add_Emp_modal {
         width: 100%;
         text-align: left;
         background-color: transparent;
     }
-    .add_Emp_modal>form{
+
+    .add_Emp_modal>form {
         margin-top: -40px;
     }
-    .imd_div{
+
+    .imd_div {
         margin-top: 30px;
         width: 100%;
         text-align: center;
     }
-    .input_div{
+
+    .input_div {
         padding-left: 30px;
         text-align: left;
     }
-    .input_div>div{
+
+    .input_div>div {
         margin-top: 10px;
     }
-    .input_div>div>label{
+
+    .input_div>div>label {
         font-size: 22px;
         color: navy;
     }
-    .input_div>div>input{
+
+    .input_div>div>input {
         width: 150px;
     }
-    .input_div>.add_btn{
+
+    .input_div>.add_btn {
         width: 100%;
         text-align: right;
     }
-    .input_div>.add_btn>button{
+
+    .input_div>.add_btn>button {
         margin: 5px;
         background-color: white;
         color: navy;
@@ -230,17 +263,27 @@ require 'php/Db.php';
         border-radius: 25px;
         margin-right: 50px;
     }
-    .input_div>.add_btn>button:hover{
+
+    .input_div>.add_btn>button:hover {
         background-color: navy;
         color: white;
 
     }
-    .add_Emp_modal>form>h1{
+
+    .add_Emp_modal>form>h1 {
         text-align: center;
         color: navy;
         font-size: 25px;
     }
 
+    .logo_text {
+        text-align: left;
+        margin-left: -100px;
+    }
+
+    #close_btn {
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -248,7 +291,7 @@ require 'php/Db.php';
     <div class="maincontainer">
         <div class="menu_div">
             <div class="logo">
-                <h3>
+                <h3 class="logo_text">
                     JIET
                 </h3>
                 <img src="images/logois.jpg" alt="" style="width: 50px;">
@@ -271,6 +314,15 @@ require 'php/Db.php';
                     <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
                             breaking_news_alt_1
                         </span><span>Result</span></li>
+
+
+                    <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
+                            person
+                        </span><span>profile</span></li>
+                    <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
+                            logout
+                        </span><span>Log Out</span></li>
+
                 </ul>
             </div>
         </div>
@@ -284,6 +336,12 @@ require 'php/Db.php';
                     JIND INSTITUTE OF ENGINEERING AND TECHNOLOGY <br>
                     RESULT MANAGEMENT SYSTEM
                 </h1>
+                <div>
+                    <img src="images/logois.jpg" alt="">
+                    <?php
+                    require 'php\Request_to_Emp.php';
+                    ?>
+                </div>
             </div>
             <div class="data">
                 <h1> Employees</h1>
@@ -304,6 +362,10 @@ require 'php/Db.php';
             </div>
             <div class="data">
                 <h1> Students</h1>
+                <?php
+                   require 'php/del_request.php';
+                   ?>
+                
             </div>
             <div class="data">
                 <h1> Add Std</h1>
@@ -352,48 +414,112 @@ require 'php/Db.php';
                         close
                     </span>
                     <div class="add_Emp_modal">
-                        <form id="registrationForm" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        <form id="registrationForm" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post"
+                            id="Add_Emp_form">
                             <div class="imd_div"> <img src="images/logois.jpg" alt="" style="width: 50px;"> </div>
                             <h1>ADD EMP</h1>
                             <div class="input_div">
                                 <div>
                                     <label for="userid">User ID:</label>
-                                    <input type="text"  name="uniqe id" >
+                                    <input type="text" name="Request_id" id="Request_id">
                                 </div>
                                 <div>
                                     <label for="regUsername">Username:</label>
-                                    <input type="text" id="regUsername"  name="Username">
+                                    <input type="text" id="regUsername" name="Username">
                                 </div>
                                 <div>
                                     <label for="Mobile">Mobile No:</label>
-                                    <input type="text" id="Mobile" maxlength="10"  name="phone">
-        
+                                    <input type="text" id="Mobile" maxlength="10" name="phone" required>
+
                                 </div>
                                 <div>
                                     <label for="regEmail">Email :</label>
-                                    <input type="text" id="regEmail" name="gmail" >
+                                    <input type="text" id="regEmail" name="gmail">
                                 </div>
                                 <div class="Mobile_input">
                                     <label for="regPassword">Password :</label>
-                                    <input type="text" id="regPassword" name="password" >
+                                    <input type="text" id="regPassword" name="password">
                                 </div>
-        
-                                <div>
-                                    <label for="regConfirmPassword">Confirm Password :</label>
-                                    <input type="text" id="regConfirmPassword" name="confirmPassword" >
-                                </div>
+
                                 <hr>
-                            <div class="add_btn">
-                                <button type="submit" class="login">Register</button>
+                                <div class="add_btn">
+                                    <button type="submit" class="login" id="login_btn">Register</button>
+                                </div>
                             </div>
-                            </div>
-                            
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <style>
+        .del_modal {
+            width: 100%;
+            height: 600px;
+            position: absolute;
+            top: 0px;
+            display: none;
+        }
 
+        .del_form {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+
+        .del_form_modal {
+            display: flex;
+            justify-content: center;
+        }
+
+        .del_req_modal {
+            width: 300px;
+            height: 400px;
+            background-color: navy;
+            border: 2px solid navy;
+            border-radius: 10px;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .del_modal_close_btn {
+            width: 100%;
+            font-size: 20px;
+            text-align: right;
+
+        }
+
+        .close_del_icon {
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .del_req_form>p {
+            font-size: 25px;
+            color: white;
+        }
+    </style>
+    <div class="del_modal" id="del_modal">
+        <div class="del_form">
+            <div class="del_form_modal">
+                <div class="del_req_modal">
+                    <div class="del_modal_close_btn">
+                        <span class="material-symbols-outlined close_del_icon" id="del_modal_close_btn">
+                            close
+                        </span>
+                    </div>
+
+                    <form  action="<?php  echo $_SERVER['PHP_SELF']; ?>" class="del_req_form" method="post">
+                        <p>Are you sure you want to Delete</p>
+                        <p class="del_name" id="del_name" style=" color: white;"></p>
+                        <input type="text" id="del_mobile" name="del_request" style="background-color: white;">
+                        <button type="submit" class="login" id="login_btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
         let modal_div = document.getElementById("add");
@@ -416,9 +542,93 @@ require 'php/Db.php';
                 i++;
             }
         }
-        open_modal()
+        function notification() {
+            let btn = document.getElementById("not_btn");
+            btn.addEventListener('click', function () {
+                let noti_div = document.getElementsByClassName('noti_div')
+                i = 0;
+                while (i < noti_div.length) {
+                    noti_div[i].style.display = 'none';
+                    i++;
+                }
+            })
+        }
+        function fetchdata() {
+            let btn_add_Emp = document.getElementsByClassName('add_emp');
+            // console.log(btn_add_Emp);
+            i = 0;
+            while (i < btn_add_Emp.length) {
+
+                btn_add_Emp[i].addEventListener('click', function (e) {
+                    let tr = e.target.parentNode.parentNode;
+                    let Emp_id = tr.getElementsByTagName('td')[4].innerHTML;
+                    let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
+                    let Mobile_no = tr.getElementsByTagName('td')[1].innerHTML;
+                    let Email = tr.getElementsByTagName('td')[2].innerHTML;
+                    let password = tr.getElementsByTagName('td')[3].innerHTML;
+                    let Emp_id_inp = document.getElementById('Request_id').value = Emp_id;
+                    let Emp_name_inp = document.getElementById('regUsername').value = Emp_name;
+                    let Emp_mobile_inp = document.getElementById('Mobile').value = Mobile_no;
+                    let Emp_Email_inp = document.getElementById('regEmail').value = Email;
+                    let Emp_password_inp = document.getElementById('regPassword').value = password;
+                    // console.log(Emp_id,Emp_name,Mobile_no,Email,password,c_password);
+                })
+                i++;
+            }
+
+        }
+        let form = document.getElementById('registrationForm');
+        form.addEventListener('submit', submited);
+        function submited() {
+            window.location.assign("https://www.w3schools.com");
+        };
+        function open_req_del_modal() {
+            let open_btn = document.getElementsByClassName('Req_del');
+            let del_modal = document.getElementById('del_modal');
+            i = 0;
+            while (i < open_btn.length) {
+                open_btn[i].addEventListener('click', function () {
+                    del_modal.style.display = "block";
+                })
+                i++;
+            }
+
+        }
+        function close_del_modal() {
+            let close_del_modal_btn = document.getElementById('del_modal_close_btn');
+            let del_modal = document.getElementById('del_modal');
+            close_del_modal_btn.addEventListener('click', function () {
+                del_modal.style.display = "none";
+                // modal_div.classList.toggle('close_div');
+
+            })
+        }
+        function fetch_for_del_req_modal(){
+            let fetch_btn = document.getElementsByClassName('Req_del');
+            i=0;
+            while(i<fetch_btn.length){
+                fetch_btn[i].addEventListener('click', function(e){
+                    let tr = e.target.parentNode.parentNode;
+                    let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
+                    let Mobile_no = tr.getElementsByTagName('td')[1].innerHTML;
+                    let input_del_mobile = document.getElementById('del_mobile').value = Mobile_no;
+                    let name = document.getElementById('del_name').innerText = Emp_name;
+                    console.log(name);
+                    
+                })
+                i++;
+            }
+        }
+        open_req_del_modal();   
+        fetch_for_del_req_modal();
+        close_del_modal()
+        fetchdata();
+        open_modal();
         close_modal();
+        notification();
+
     </script>
+
 </body>
 
 </html>
