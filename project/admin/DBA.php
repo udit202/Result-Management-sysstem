@@ -365,7 +365,7 @@ require 'php/Db.php';
                 <?php
                    require 'php/del_request.php';
                    ?>
-                
+
             </div>
             <div class="data">
                 <h1> Add Std</h1>
@@ -460,6 +460,7 @@ require 'php/Db.php';
             position: absolute;
             top: 0px;
             display: none;
+            text-align: center;
         }
 
         .del_form {
@@ -469,18 +470,21 @@ require 'php/Db.php';
         }
 
         .del_form_modal {
+            width: 100%;
+            height: 600px;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         .del_req_modal {
-            width: 300px;
-            height: 400px;
+            width: 440px;
+            height: 230px;
             background-color: navy;
             border: 2px solid navy;
             border-radius: 10px;
-            padding: 5px;
-            text-align: center;
+            padding: 25px;
+            text-align: left;
         }
 
         .del_modal_close_btn {
@@ -500,6 +504,24 @@ require 'php/Db.php';
             font-size: 25px;
             color: white;
         }
+
+        .del_btn_div {
+            width: 100%;
+            text-align: right;
+        }
+
+        .Del_req_btn:hover {
+            border: 2px solid white;
+        }
+
+        .del_name {
+            margin-top: 0px;
+            color: white;
+            text-align: left;
+
+
+
+        }
     </style>
     <div class="del_modal" id="del_modal">
         <div class="del_form">
@@ -511,16 +533,137 @@ require 'php/Db.php';
                         </span>
                     </div>
 
-                    <form  action="<?php  echo $_SERVER['PHP_SELF']; ?>" class="del_req_form" method="post">
+                    <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" class="del_req_form" method="post">
                         <p>Are you sure you want to Delete</p>
-                        <p class="del_name" id="del_name" style=" color: white;"></p>
-                        <input type="text" id="del_mobile" name="del_request" style="background-color: white;">
-                        <button type="submit" class="login" id="login_btn">Register</button>
+                        <p class="del_name" id="del_name"></p>
+                        <input type="text" id="del_mobile" name="del_request" style="background-color: white;" hidden>
+                        <hr>
+                        <div class="del_btn_div">
+                            <button type="submit" class="Req_del Del_req_btn" id="Del_req_btn">Delete</button>
+                            <button type="button" class="Req_del Del_req_btn" id="cancel_del_btn">Cancel</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        .Emp_del_modal {
+            width: 100%;
+            height: 600px;
+            border-radius: 25px;
+            position: absolute;
+            top: 5px;
+            display: none;
+        }
+
+        .Emp_del_modal>div {
+            width: 100%;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .Emp_del_modal>div>div {
+            width: 440px;
+            height: 230px;
+            background-color: navy;
+            align-content: center;
+            margin: 10px;
+            border-radius: 25px;
+
+
+        }
+
+        .emp_close_cross {
+            width: 100%;
+            color: white;
+            text-align: right;
+        }
+
+        .emp_close_cross>span {
+            font-size: 40px;
+            cursor: pointer;
+            padding: 10px;
+            transition: font-size 0.3s;
+        }
+
+        .emp_close_cross>span:hover {
+            font-size: 30px;
+
+        }
+
+        .Emp_del_form {
+            color: white;
+            font-size: 20px;
+            padding-left: 23px;
+            margin-top: 0px;
+        }
+
+        .Emp_del_form>div {
+            width: 100%;
+            text-align: right;
+        }
+
+        .Emp_del_form>div>button:hover {
+            border: 2px solid white;
+        }
+    </style>
+    <div class="Emp_del_modal" id="Emp_del_modal">
+        <div>
+            <div>
+                <div class="emp_close_cross">
+                    <span class="material-symbols-outlined " id="close_emp_del_modal_btn">
+                        close
+                    </span>
+                </div>
+                <div>
+                    <form action="" class="Emp_del_form">
+                        <p>Are you sure you want to Delete</p>
+                        <p class="del_name" id="del_emp_name">udit</p>
+                        <input type="text" id="del_emp_mobile" name="" style="background-color: white;" hidden>
+                        <hr>
+                        <div class="">
+                            <button type="submit" class="Emp_del">Delete</button>
+                            <button type="button" class="Emp_del">Cancel</button>
+                        </div>
+                    </form>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function emp_del_modal() {
+            let Emp_del_btn = document.getElementsByClassName('Emp_del');
+            let Emp_del_modal = document.getElementById('Emp_del_modal');
+            let close_emp_del_modal_btn = document.getElementById('close_emp_del_modal_btn');
+
+
+
+            close_emp_del_modal_btn.addEventListener('click', function () {
+                Emp_del_modal.style.display = "none";
+            })
+            let i = 0;
+            while (i < Emp_del_btn.length) {
+                Emp_del_btn[i].addEventListener('click', function (e) {
+                    Emp_del_modal.style.display = "block";
+                    let tr = e.target.parentNode.parentNode;
+                    let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
+                    let Mobile_no = tr.getElementsByTagName('td')[1].innerHTML;
+                    let input_del_mobile = document.getElementById('del_emp_mobile').value = Mobile_no;
+                    let name = document.getElementById('del_emp_name').innerText = Emp_name;
+
+                })
+                i++;
+
+            }
+        }
+        emp_del_modal()
+    </script>
     <script>
         let modal_div = document.getElementById("add");
         let close_btn = document.getElementById("close_btn");
@@ -577,11 +720,7 @@ require 'php/Db.php';
             }
 
         }
-        let form = document.getElementById('registrationForm');
-        form.addEventListener('submit', submited);
-        function submited() {
-            window.location.assign("https://www.w3schools.com");
-        };
+
         function open_req_del_modal() {
             let open_btn = document.getElementsByClassName('Req_del');
             let del_modal = document.getElementById('del_modal');
@@ -592,34 +731,39 @@ require 'php/Db.php';
                 })
                 i++;
             }
-
         }
         function close_del_modal() {
             let close_del_modal_btn = document.getElementById('del_modal_close_btn');
+            let cancel_del_btn = document.getElementById('cancel_del_btn');
             let del_modal = document.getElementById('del_modal');
             close_del_modal_btn.addEventListener('click', function () {
                 del_modal.style.display = "none";
                 // modal_div.classList.toggle('close_div');
 
             })
+            cancel_del_btn.addEventListener('click', function () {
+                del_modal.style.display = "none";
+                // modal_div.classList.toggle('close_div');
+
+            })
         }
-        function fetch_for_del_req_modal(){
+        function fetch_for_del_req_modal() {
             let fetch_btn = document.getElementsByClassName('Req_del');
-            i=0;
-            while(i<fetch_btn.length){
-                fetch_btn[i].addEventListener('click', function(e){
+            i = 0;
+            while (i < fetch_btn.length) {
+                fetch_btn[i].addEventListener('click', function (e) {
                     let tr = e.target.parentNode.parentNode;
                     let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
                     let Mobile_no = tr.getElementsByTagName('td')[1].innerHTML;
                     let input_del_mobile = document.getElementById('del_mobile').value = Mobile_no;
                     let name = document.getElementById('del_name').innerText = Emp_name;
                     console.log(name);
-                    
+
                 })
                 i++;
             }
         }
-        open_req_del_modal();   
+        open_req_del_modal();
         fetch_for_del_req_modal();
         close_del_modal()
         fetchdata();
@@ -628,6 +772,7 @@ require 'php/Db.php';
         notification();
 
     </script>
+
 
 </body>
 

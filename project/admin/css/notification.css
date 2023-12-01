@@ -11,10 +11,9 @@
 .error{
     width: 100%;
     text-align: left;
+    
 }
-h3{
-    padding-left: 150px;
-}
+
 .pending{
     background-color: rgb(244, 155, 159);
     border: 2px solid black;
