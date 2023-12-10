@@ -12,6 +12,7 @@ $conn= mysqli_connect($servername, $username, $password, $database);
 //  $sql = "CREATE TABLE `jiet`.`employes` (`id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `mobile` VARCHAR(45) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , `del` VARCHAR(6) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`mobile`)) ENGINE = InnoDB";
 // Create request table
 //  $sql = "CREATE TABLE `jiet`.`request` (`id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(50) NOT NULL , `mobile` VARCHAR(45) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , `del` VARCHAR(6) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`mobile`)) ENGINE = InnoDB";
+//  $sql = "CREATE TABLE `jiet`.`student` (`id` INT NOT NULL AUTO_INCREMENT , `rollno` INT NOT NULL , `name` VARCHAR(20) NOT NULL , `father` VARCHAR(20) NOT NULL , `class` INT NOT NULL , `eng` INT NOT NULL , `hindi` INT NOT NULL , `math` INT NOT NULL , `phy` INT NOT NULL , `chem` INT NOT NULL , `maxeng` INT NOT NULL , `maxhindi` INT NOT NULL , `maxmath` INT NOT NULL , `maxphy` INT NOT NULL , `maxchem` INT NOT NULL , `editby` VARCHAR(20) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`rollno`)) ENGINE = InnoDB;";
 // $result = mysqli_query($conn,$sql);
 // Check connection
 // if ($result) {

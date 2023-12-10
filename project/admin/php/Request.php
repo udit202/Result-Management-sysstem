@@ -18,9 +18,9 @@
 $sql = "SELECT * FROM `request`";
 $result = mysqli_query($conn,$sql);
 $num = mysqli_num_rows($result);
-if($result){
-echo "working";
-}
+// if($result){
+// echo "working";
+// }
 $no = 1;
 if($num>0){
 while ($row=mysqli_fetch_assoc($result)){

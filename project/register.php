@@ -8,8 +8,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
      $mobile = $_POST['phone'];
      $email = $_POST['gmail'];
      $password = $_POST['password'];
-    //  $sql = "INSERT INTO `request` (`name`, `mobile`, `email`, `password`, `del`) VALUES ('$username', '$mobile', '$email', '$password', ' $admin_id')";
-    //  $result = mysqli_query($conn,$sql);
      $exist = "SELECT * FROM `request` WHERE mobile = $mobile";
      $userexist = mysqli_query($conn,$exist);
      $num = mysqli_num_rows($userexist);

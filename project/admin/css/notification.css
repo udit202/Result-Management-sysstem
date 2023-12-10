@@ -3,7 +3,7 @@
     top: 5px;
     width: 98%;
     background-color: rgb(238, 225, 225);
-    z-index: 3;
+    z-index: 5;
 }
 .noti_div2{
     position: relative;
@@ -29,6 +29,7 @@
     position: absolute;
     top: 0px;
     right: 15px;
+    cursor: pointer;
     font-size: 25px;
 }
 .noti_btn>span{
