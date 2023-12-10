@@ -934,19 +934,19 @@ require 'php/Db.php';
                             <div style="width: 100%;" class="basic_details up_del">
                                 <div>
                                     <label for="">RollNo :</label>
-                                    <input type="text" name="up_rollno">
+                                    <input type="text" name="up_rollno" id="up_rollno" disabled>
                                 </div>
                                 <div>
                                     <label for="">Name :</label>
-                                    <input type="text" name="up_std_name" required>
+                                    <input type="text" name="up_std_name" id="std_name" required>
                                 </div>
                                 <div style="margin-top: -5px;">
                                     <label for="">Father Name :</label>
-                                    <input type="text" name="father" required>
+                                    <input type="text" name="father" id="std_father" required>
                                 </div>
                                 <div>
                                     <label for="">Branch :</label>
-                                    <input type="text" value="12th" name="class" required>
+                                    <input type="text" value="12th" name="class" id="Branch" required>
                                 </div>
                             </div>
                             <hr>
@@ -956,55 +956,56 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Optained Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="eng">
+                                    <input class="num" type="number" max="100" min="0" id="eng" required name="eng">
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="maxeg">
+                                    <input class="num" id="maxeng" type="number" max="100" min="0" required name="maxeng">
                                 </div>
                                 <div>
                                     <label for="">Hindi :</label>
                                     <br>
                                     <br>
                                     <label for="">Optained Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="hindi">
+                                    <input class="num" id="hindi" type="number" max="100" min="0" required name="hindi">
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="maxhindi">
+                                    <input class="num" id="maxhindi" type="number" max="100" min="0" required name="maxhindi">
                                 </div>
                                 <div>
                                     <label for="">Mathmatics :</label>
                                     <br>
                                     <br>
                                     <label for="">Optained Marks :</label>
-                                    <input class="num" type="number" required max="100" min="0" name="math">
+                                    <input class="num" id="math" type="number" required max="100" min="0" name="math">
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" required max="100" min="0" name="maxmath">
+                                    <input class="num" id="maxmath" type="number" required max="100" min="0" name="maxmath">
                                 </div>
                                 <div>
                                     <label for="">Physics :</label>
                                     <br>
                                     <br>
                                     <label for="">Optained Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="phy">
+                                    <input class="num" id="phy" type="number" max="100" min="0" required name="phy">
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="maxphy">
+                                    <input class="num" id="maxphy" type="number" max="100" min="0" required name="maxphy">
                                 </div>
                                 <div>
                                     <label for="">chemistry :</label>
                                     <br>
                                     <br>
                                     <label for="">Optained Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="chem">
+                                    <input class="num" type="number" id="chem" max="100" min="0" required name="chem">
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" max="100" min="0" required name="maxchem">
+                                    <input class="num" type="number" id="maxchem" max="100" min="0" required name="maxchem">
+                                    <input type="text" name="editby" id="editby"  hidden>
                                 </div>
                             </div>
                             <hr>
@@ -1051,7 +1052,6 @@ require 'php/Db.php';
         function update_std() {
 
             let open_btn = document.getElementsByClassName('up_std');
-            let up_std_modal = document.getElementById('updates_stp_pos');
             let crossbtn = document.getElementById("std_close_btn");
             let update_form = document.getElementById('updates_stp_pos')
             crossbtn.addEventListener('click', function () {
@@ -1060,20 +1060,54 @@ require 'php/Db.php';
             let i = 0;
             while (i < open_btn.length) {
                 open_btn[i].addEventListener('click', function () {
-                    up_std_modal.style.display = "block";
+                    update_form.style.display = "block";
                 })
                 i++;
             }
-            while (i < open_btn.length) {
-                open_btn[i].addEventListener('click', function(){
-                    console.log('udit')
+        }
+        function fech_update(){
+            let open_btn = document.getElementsByClassName('up_std');
+            let i = 0;
+            while(i<open_btn.length){
+                open_btn[i].addEventListener('click', function(e){
+                    let tr = e.target.parentNode.parentNode;
+                    let std_id = tr.getElementsByTagName('td')[0].innerHTML;
+                    let username = tr.getElementsByTagName('td')[1].innerHTML;
+                    let father = tr.getElementsByTagName('td')[2].innerHTML;
+                    let Std_class = tr.getElementsByTagName('td')[3].innerHTML;
+                    let eng = tr.getElementsByTagName('td')[4].innerHTML;
+                    let maxeng = tr.getElementsByTagName('td')[5].innerHTML;
+                    let Hindi = tr.getElementsByTagName('td')[6].innerHTML;
+                    let maxhindi = tr.getElementsByTagName('td')[7].innerHTML;
+                    let math = tr.getElementsByTagName('td')[8].innerHTML;
+                    let maxmath = tr.getElementsByTagName('td')[9].innerHTML;
+                    let phy = tr.getElementsByTagName('td')[10].innerHTML;
+                    let maxphy = tr.getElementsByTagName('td')[11].innerHTML;
+                    let chem = tr.getElementsByTagName('td')[12].innerHTML;
+                    let maxchem = tr.getElementsByTagName('td')[13].innerHTML;
+                    let inp_std_id = document.getElementById('up_rollno').value=std_id;
+                    let in_username = document.getElementById('std_name').value =username;
+                    let in_father = document.getElementById('std_father').value=father;
+                    let in_Std_class = document.getElementById('Branch').value=Std_class;
+                    let in_eng = document.getElementById('eng').value=eng;
+                    let in_maxeng = document.getElementById('maxeng').value=maxeng;
+                    let in_Hindi = document.getElementById('hindi').value=Hindi;
+                    let in_maxhindi =document.getElementById('maxhindi').value=maxhindi;
+                    let in_math =document.getElementById('math').value=math
+                    let in_maxmath =document.getElementById('maxmath').value =maxmath;
+                    let in_phy = document.getElementById('phy').value = phy;
+                    let in_maxphy = document.getElementById('maxphy').value=maxphy;
+                    let in_chem = document.getElementById('chem').value =chem;
+                    let in_maxchem = document.getElementById('maxchem').value=maxchem;
+                    let in_editby = document.getElementById('editby').value = 'udit';
+                    
+                    
                 })
                 i++;
             }
-
-
 
         }
+        fech_update()
         update_std()
         function emp_del_modal() {
             let Emp_del_btn = document.getElementsByClassName('Emp_del');

@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $maxphy = $_POST['maxphy'];
         $chem = $_POST['chem'];
         $maxchem = $_POST['maxchem'];
-        $sql ="UPDATE `student` SET `name` = '$username', `father` = '$father', `class` = '$class', `eng` = '$eng', `hindi` = '$Hindi', `math` = '$math', `phy` = '$phy', `chem` = '$chem', `maxeng` = '$maxeng', `maxhindi` = '$Hindi', `maxmath` = '$maxmath', `maxphy` = '$maxphy', `maxchem` = '$maxchem', `editby` = 'parveen' WHERE `student`.`rollno` = $std_id"; 
+        $sql ="UPDATE `student` SET `name` = '$username', `father` = '$father', `class` = '$class', `eng` = '$eng', `hindi` = '$Hindi', `math` = '$math', `phy` = '$phy', `chem` = '$chem', `maxeng` = '$maxeng', `maxhindi` = '$Hindi', `maxmath` = '$maxmath', `maxphy` = '$maxphy', `maxchem` = '$maxchem', `editby` = 'parveen' WHERE `student`.`rollno` = '$std_id'"; 
          $result = mysqli_query($conn,$sql);
         if($result){
             echo '<div class="noti_div succesfully" id="noti_div" style="top:25px;">
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         else{
             echo "not Uodated please contect with Hod";
         }
-// echo "udit Dhiman";
+echo "udit Dhiman";
     }
 }
 
