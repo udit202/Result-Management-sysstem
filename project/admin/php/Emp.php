@@ -29,7 +29,7 @@ if($num>0){
     <td>'.$row['email'].'</td>
     <td>'.$row['password'].'</td>
     <td>'.$row['del'].'</td>
-    <td>  <button type="button" class="Emp_up" id="Emp_up" >Edit</button>  <button type="button" class="Emp_del" id="Emp_del" >Deleted</button> </td>
+    <td>  <button type="button" class="Emp_up" id="Emp_up" >Update</button>  <button type="button" class="Emp_del" id="Emp_del" >Deleted</button> </td>
     
   </tr>';
   $no = $no+1;

@@ -49,13 +49,9 @@ echo '<tr>
 <td>'.$row['phy'].'</td>
 <td>'.$row['maxphy'].'</td>
 <td>'.$row['chem'].'</td>
-
-
-
-
 <td>'.$row['maxchem'].'</td>
 <td>'.$row['editby'].'</td>
-<td>  <button type="button" class="up_std" id="up_std">Add</button> <button type="button" class="Req_del" id="del_req">Delete</button></td>
+<td>  <button type="button" class="up_std" id="up_std">Update</button> <button type="button" class="del_std" id="del_std">Delete</button></td>
 
 </tr>';
 $no = $no+1;

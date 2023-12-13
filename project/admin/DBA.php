@@ -80,8 +80,45 @@ require 'php/Db.php';
                     JIND INSTITUTE OF ENGINEERING AND TECHNOLOGY <br>
                     RESULT MANAGEMENT SYSTEM
                 </h1>
-                <div>
-                    <img src="images/logois.jpg" alt="">
+                <div class="Home_data">
+                    <!-- <img src="images/logois.jpg" alt=""> -->
+                    <div>
+                        <div>
+                            <h1>Employees</h1>
+                            <h1>
+                                <?php
+                                $sql = "SELECT * FROM `employes`";
+                                $result = mysqli_query($conn,$sql);
+                                $num = mysqli_num_rows($result);
+                                echo $num;
+                                ?>
+                            </h1>
+                        </div>
+                        <div>
+                            <h1>Requests</h1>
+                            <h1>
+                                <?php
+                                $sql = "SELECT * FROM `request`";
+                                $result = mysqli_query($conn,$sql);
+                                $num = mysqli_num_rows($result);
+                                echo $num;
+                                ?>
+                            </h1>
+                        </div>
+                        <div>
+                            <h1>
+                                Students
+                            </h1>
+                            <h1>
+                                <?php
+                                $sql = "SELECT * FROM `student`";
+                                $result = mysqli_query($conn,$sql);
+                                $num = mysqli_num_rows($result);
+                                echo $num;
+                                ?>
+                            </h1>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -89,6 +126,8 @@ require 'php/Db.php';
                 <h1> Employees</h1>
                 <div>
                     <?php
+
+                    require 'php/Update_Emp.php';
                     require 'php/Emp.php';
                     require 'php/del_emp.php';
 
@@ -112,20 +151,16 @@ require 'php/Db.php';
                     <?php
                     require 'php/update_std.php';
                     require 'php/student.php';
+                    require 'php/del_std.php';
                     ?>
                 </div>
-
-
-
             </div>
             <div class="data ">
-
                 <div>
                     <?php
                    require 'php/std_add.php';
                    ?>
                     <h1> Add Std</h1>
-
                     <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post" class="addstdform">
                         <div style="width: 100%;">
                             <br>
@@ -207,8 +242,6 @@ require 'php/Db.php';
                             </div>
                             <hr>
                         </div>
-
-
                         <div class="addstd_div" style="width: 100%;text-align: right;">
                             <button type="submit">Add Student</button>
                             <button type="reset">Reset</button>
@@ -340,9 +373,44 @@ require 'php/Db.php';
                 overflow: scroll;
             }
 
-            .home {
+            .home{
                 display: block;
             }
+            .Home_data{
+                position: relative;
+            }
+            .Home_data>img{
+                width: 350px;
+                z-index: -2;
+            }
+            .Home_data>div{
+                width: 100%;
+                position: absolute;
+                top: 5px;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+            }
+            .Home_data>div>div{
+                width: 220px;
+                height: 140px;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                border-radius: 25px;
+                text-align: center;
+                color: white;
+            }
+            .Home_data>div>:nth-child(1){
+                background-color: rgb(9, 9, 36);
+            }
+            .Home_data>div>:nth-child(2){
+                background-color: rgb(35, 2, 41);
+            }
+            .Home_data>div>:nth-child(3){
+                background-color: rgb(5, 23, 42);
+            }
+            
+
 
             .closebtn {
                 text-align: right;
@@ -387,6 +455,7 @@ require 'php/Db.php';
             .Req_del,
             .up_std,
             .Emp_up,
+            .del_std,
             .Emp_del {
                 margin: 5px;
                 background-color: white;
@@ -402,6 +471,7 @@ require 'php/Db.php';
             .Req_del:hover,
             .Emp_up:hover,
             .up_std:hover,
+            .del_std:hover,
             .Emp_del:hover {
                 background-color: navy;
                 color: white;
@@ -679,6 +749,7 @@ require 'php/Db.php';
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                z-index: 5;
 
 
             }
@@ -747,6 +818,12 @@ require 'php/Db.php';
             .update_btn_div>:nth-child(2) {
                 margin-right: 30px;
                 margin-left: 20px;
+            }
+
+            #up_rollno {
+                border: none;
+                background-color: rgb(6, 6, 51);
+                color: white;
             }
         </style>
     </div>
@@ -844,6 +921,31 @@ require 'php/Db.php';
             </div>
         </div>
     </div>
+    </div>
+    <div class="Emp_del_modal" id="Emp_del_modal">
+        <div>
+            <div>
+                <div class="emp_close_cross">
+                    <span class="material-symbols-outlined " id="close_emp_del_modal_btn">
+                        close
+                    </span>
+                </div>
+                <div>
+                    <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" class="Emp_del_form" method="post">
+                        <p>Are you sure you want to Delete</p>
+                        <p class="del_name" id="del_emp_name">udit</p>
+                        <input type="text" id="del_emp_mobile" name="del_emp_mobile" style="background-color: white;"
+                            hidden>
+                        <hr>
+                        <div class="">
+                            <button type="submit" class="Emp_del">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         .Emp_del_modal {
             width: 100%;
@@ -915,7 +1017,33 @@ require 'php/Db.php';
             display: none;
         }
     </style>
+    <div class="std_del_modal" id="std_del_modal">
+        <div class="del_std_div">
+            <div class="std_close_cross">
+                <span class="material-symbols-outlined close_std_btn " id="close_std_btn">
+                    close
+                </span>
+                <div class="std_del_form">
+                    <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post">
+                        <div>
+                            <p>Are you sure you want to Delete</p>
+                            <p class="" id="std_name_para"></p>
+                            <p>whose Roll No:</p>
+                            <p class="" id="std_rollno_para"></p>
+                            <input type="text" name="del_rollno" class="del_std_input" id="del_std_input" hidden>
+                        </div>
+                        <hr>
+                        <div class="del_std_buttons">
+                            <button type="submit">Delete</button>
+                            <button type="button">Cancel</button>
+                        </div>
 
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <div class="std_update_modal" id="updates_stp_pos">
         <div class="updates_std_pos">
             <div class="">
@@ -934,7 +1062,7 @@ require 'php/Db.php';
                             <div style="width: 100%;" class="basic_details up_del">
                                 <div>
                                     <label for="">RollNo :</label>
-                                    <input type="text" name="up_rollno" id="up_rollno" disabled>
+                                    <input type="text" name="up_rollno" id="up_rollno">
                                 </div>
                                 <div>
                                     <label for="">Name :</label>
@@ -960,7 +1088,8 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" id="maxeng" type="number" max="100" min="0" required name="maxeng">
+                                    <input class="num" id="maxeng" type="number" max="100" min="0" required
+                                        name="maxeng">
                                 </div>
                                 <div>
                                     <label for="">Hindi :</label>
@@ -971,7 +1100,8 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" id="maxhindi" type="number" max="100" min="0" required name="maxhindi">
+                                    <input class="num" id="maxhindi" type="number" max="100" min="0" required
+                                        name="maxhindi">
                                 </div>
                                 <div>
                                     <label for="">Mathmatics :</label>
@@ -982,7 +1112,8 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" id="maxmath" type="number" required max="100" min="0" name="maxmath">
+                                    <input class="num" id="maxmath" type="number" required max="100" min="0"
+                                        name="maxmath">
                                 </div>
                                 <div>
                                     <label for="">Physics :</label>
@@ -993,7 +1124,8 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" id="maxphy" type="number" max="100" min="0" required name="maxphy">
+                                    <input class="num" id="maxphy" type="number" max="100" min="0" required
+                                        name="maxphy">
                                 </div>
                                 <div>
                                     <label for="">chemistry :</label>
@@ -1004,8 +1136,9 @@ require 'php/Db.php';
                                     <br>
                                     <br>
                                     <label for="">Max Marks :</label>
-                                    <input class="num" type="number" id="maxchem" max="100" min="0" required name="maxchem">
-                                    <input type="text" name="editby" id="editby"  hidden>
+                                    <input class="num" type="number" id="maxchem" max="100" min="0" required
+                                        name="maxchem">
+                                    <input type="text" name="editby" id="editby" hidden>
                                 </div>
                             </div>
                             <hr>
@@ -1022,30 +1155,131 @@ require 'php/Db.php';
             </div>
         </div>
     </div>
-    <div class="Emp_del_modal" id="Emp_del_modal">
-        <div>
-            <div>
-                <div class="emp_close_cross">
-                    <span class="material-symbols-outlined " id="close_emp_del_modal_btn">
-                        close
-                    </span>
-                </div>
-                <div>
-                    <form action="<?php  echo $_SERVER['PHP_SELF']; ?>" class="Emp_del_form" method="post">
-                        <p>Are you sure you want to Delete</p>
-                        <p class="del_name" id="del_emp_name">udit</p>
-                        <input type="text" id="del_emp_mobile" name="del_emp_mobile" style="background-color: white;"
-                            hidden>
-                        <hr>
-                        <div class="">
-                            <button type="submit" class="Emp_del">Delete</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+    <script>
+        function del_std_modal() {
+            const close_btn = document.getElementById("close_std_btn");
+            const std_del_modal = document.getElementById("std_del_modal");
+            const del_btn = document.getElementsByClassName('del_std');
+            let i = 0;
+            while (i < del_btn.length) {
+                del_btn[i].addEventListener('click', function () {
+                    std_del_modal.style.display = "block";
+                })
+                i++;
+            }
 
-    </div>
+            close_btn.addEventListener('click', function () {
+                std_del_modal.style.display = "none";
+            })
+        }
+        function fetch_std_del() {
+            const del_btn = document.getElementsByClassName('del_std');
+            let i = 0;
+            while (i < del_btn.length) {
+                del_btn[i].addEventListener('click', function (e) {
+                    let tr = e.target.parentNode.parentNode;
+                    let del_std_input = document.getElementById('del_std_input');
+                    let std_name_p = document.getElementById('std_name_para');
+                    let std_rollno_p = document.getElementById('std_rollno_para');
+                    let std_name = tr.getElementsByTagName('td')[1].innerHTML;
+                    let std_rollno = tr.getElementsByTagName('td')[0].innerHTML;
+                    del_std_input.value = std_rollno
+                    std_name_p.innerHTML = std_name;
+                    std_rollno_p.innerHTML = std_rollno
+                })
+                i++;
+            }
+
+        }
+        fetch_std_del()
+        del_std_modal()
+    </script>
+    <style>
+        .std_del_modal {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: none;
+        }
+
+        .del_std_div {
+            position: relative;
+            display: flex;
+            height: 600px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .del_std_div>div {
+            width: 400px;
+            height: auto;
+            background-color: navy;
+            border-radius: 25px;
+            z-index: 3;
+        }
+
+        .std_close_cross {
+            width: 100%;
+            text-align: right;
+        }
+
+        .close_std_btn {
+            font-size: 40px;
+            margin: 5px;
+            color: white;
+            cursor: pointer;
+            transition: font-size 0.5s;
+        }
+
+        .close_std_btn:hover {
+            font-size: 35px;
+        }
+
+        .std_del_form {
+            width: 100%;
+        }
+
+        .std_del_form {
+            width: 100%;
+            text-align: left;
+            margin-left: 20px;
+            font-size: 18px;
+            color: white;
+        }
+
+        .std_del_form>form>:nth-child(1) {
+            width: 90%;
+            font-size: 18px;
+        }
+
+        .del_std_buttons {
+            width: 95%;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .del_std_buttons>button {
+            margin: 5px;
+            font-size: 15px;
+            padding: 3px 20px;
+            background-color: white;
+            border-radius: 25px;
+            border: 2px solid navy;
+            color: navy;
+            margin-right: 20px;
+        }
+
+        .del_std_buttons>button:hover {
+            font-size: 15px;
+            padding: 3px 20px;
+            background-color: navy;
+            border-radius: 25px;
+            border: 2px solid white;
+            color: white;
+        }
+    </style>
+
+
     <link rel="stylesheet" href="css/DBA.css">
     <script src="js/DBA_Script.js"></script>
     <script>
@@ -1065,11 +1299,11 @@ require 'php/Db.php';
                 i++;
             }
         }
-        function fech_update(){
+        function fech_update() {
             let open_btn = document.getElementsByClassName('up_std');
             let i = 0;
-            while(i<open_btn.length){
-                open_btn[i].addEventListener('click', function(e){
+            while (i < open_btn.length) {
+                open_btn[i].addEventListener('click', function (e) {
                     let tr = e.target.parentNode.parentNode;
                     let std_id = tr.getElementsByTagName('td')[0].innerHTML;
                     let username = tr.getElementsByTagName('td')[1].innerHTML;
@@ -1085,23 +1319,23 @@ require 'php/Db.php';
                     let maxphy = tr.getElementsByTagName('td')[11].innerHTML;
                     let chem = tr.getElementsByTagName('td')[12].innerHTML;
                     let maxchem = tr.getElementsByTagName('td')[13].innerHTML;
-                    let inp_std_id = document.getElementById('up_rollno').value=std_id;
-                    let in_username = document.getElementById('std_name').value =username;
-                    let in_father = document.getElementById('std_father').value=father;
-                    let in_Std_class = document.getElementById('Branch').value=Std_class;
-                    let in_eng = document.getElementById('eng').value=eng;
-                    let in_maxeng = document.getElementById('maxeng').value=maxeng;
-                    let in_Hindi = document.getElementById('hindi').value=Hindi;
-                    let in_maxhindi =document.getElementById('maxhindi').value=maxhindi;
-                    let in_math =document.getElementById('math').value=math
-                    let in_maxmath =document.getElementById('maxmath').value =maxmath;
+                    let inp_std_id = document.getElementById('up_rollno').value = std_id;
+                    let in_username = document.getElementById('std_name').value = username;
+                    let in_father = document.getElementById('std_father').value = father;
+                    let in_Std_class = document.getElementById('Branch').value = Std_class;
+                    let in_eng = document.getElementById('eng').value = eng;
+                    let in_maxeng = document.getElementById('maxeng').value = maxeng;
+                    let in_Hindi = document.getElementById('hindi').value = Hindi;
+                    let in_maxhindi = document.getElementById('maxhindi').value = maxhindi;
+                    let in_math = document.getElementById('math').value = math
+                    let in_maxmath = document.getElementById('maxmath').value = maxmath;
                     let in_phy = document.getElementById('phy').value = phy;
-                    let in_maxphy = document.getElementById('maxphy').value=maxphy;
-                    let in_chem = document.getElementById('chem').value =chem;
-                    let in_maxchem = document.getElementById('maxchem').value=maxchem;
+                    let in_maxphy = document.getElementById('maxphy').value = maxphy;
+                    let in_chem = document.getElementById('chem').value = chem;
+                    let in_maxchem = document.getElementById('maxchem').value = maxchem;
                     let in_editby = document.getElementById('editby').value = 'udit';
-                    
-                    
+
+
                 })
                 i++;
             }
@@ -1153,17 +1387,17 @@ require 'php/Db.php';
                 i++;
             }
         }
-        // function notification() {
-        //     let btn = document.getElementById("not_btn");
-        //     btn.addEventListener('click', function () {
-        //         let noti_div = document.getElementsByClassName('noti_div')
-        //         i = 0;
-        //         while (i < noti_div.length) {
-        //             noti_div[i].style.display = 'none';
-        //             i++;
-        //         }
-        //     })
-        // }
+        function notification() {
+            let btn = document.getElementById("not_btn");
+            btn.addEventListener('click', function () {
+                let noti_div = document.getElementsByClassName('noti_div')
+                i = 0;
+                while (i < noti_div.length) {
+                    noti_div[i].style.display = 'none';
+                    i++;
+                }
+            })
+        }
         function fetchdata() {
             let btn_add_Emp = document.getElementsByClassName('add_emp');
             // console.log(btn_add_Emp);
@@ -1248,7 +1482,7 @@ require 'php/Db.php';
         fetchdata();
         open_modal();
         close_modal();
-        // notification();
+        notification();
 
     </script>
     <div class="developer">
@@ -1258,7 +1492,98 @@ require 'php/Db.php';
 
     </div>
 
+    <div class="add_modal" id="Edit_Emp">
+        <div class="add_form">
+            <div class="add_form_modal">
+                <div class="closebtn">
+                    <span class="material-symbols-outlined add_close_btn" id="Edit_close_btn">
+                        close
+                    </span>
+                    <div class="add_Emp_modal">
+                        <form id="registrationForm" action="<?php  echo $_SERVER['PHP_SELF']; ?>" method="post"
+                            id="Add_Emp_form">
+                            <div class="imd_div"> <img src="images/logois.jpg" alt="" style="width: 50px;"> </div>
+                            <h1>UPDATE EMP</h1>
+                            <div class="input_div">
+                                <div>
+                                    <label for="">User ID:</label>
+                                    <input type="text" name="Emp_up_id" id="Emp_up_id">
+                                </div>
+                                <hr>
+                                <div>
+                                    <label for="">Username:</label>
+                                    <input type="text" id="up_Emp_name" name="up_Emp_name">
+                                </div>
+                                <hr>
+                                <div>
+                                    <label for="">Mobile No:</label>
+                                    <input type="text" id="up_Emp_mobile" maxlength="10" name="up_Emp_mobile" required>
 
+                                </div>
+                                <hr>
+                                <div>
+                                    <label for="">Email :</label>
+                                    <input type="text" id="up_Emp_Email" name="up_Emp_Email">
+                                </div>
+                                <hr>
+                                <div class="">
+                                    <label for="regPassword">Password :</label>
+                                    <input type="text" id="up_Emp_pass" name="up_Emp_pass">
+                                </div>
+
+                                <hr>
+                                <div class="add_btn">
+                                    <button type="submit" class="login" id="login_btn">Update</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function fetch_Emp_up_modal(){
+            let open_btn= document.getElementsByClassName('Emp_up');
+            let i=0;
+            while(i<open_btn.length){
+                open_btn[i].addEventListener('click', function(e){
+                    let tr = e.target.parentNode.parentNode;
+                    let up_Emp_id = tr.getElementsByTagName('td')[4].innerHTML;
+                    let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
+                    let Mobile_no = tr.getElementsByTagName('td')[1].innerHTML;
+                    let Email = tr.getElementsByTagName('td')[2].innerHTML;
+                    let password = tr.getElementsByTagName('td')[3].innerHTML;
+                    let Emp_id_inp = document.getElementById('Emp_up_id').value = up_Emp_id;
+                    let Emp_name_inp = document.getElementById('up_Emp_name').value = Emp_name;
+                    let Emp_mobile_inp = document.getElementById('up_Emp_mobile').value = Mobile_no;
+                    let Emp_Email_inp = document.getElementById('up_Emp_Email').value = Email;
+                    let Emp_password_inp = document.getElementById('up_Emp_pass').value = password;
+                    console.log(up_Emp_id,Emp_name,Mobile_no,Email,password)
+                })
+                i++;
+            }
+        }
+        fetch_Emp_up_modal()
+        function open_Edit_Emp(){
+            const close_btn= document.getElementById('Edit_close_btn')
+            const Edit_modal= document.getElementById('Edit_Emp');
+            let open_btn= document.getElementsByClassName('Emp_up');
+            let i=0;
+            while(i<open_btn.length){
+                open_btn[i].addEventListener('click',function(){
+                    Edit_modal.style.display="block";
+                });
+                i++;
+            }
+            close_btn.addEventListener('click', function(){
+                Edit_modal.style.display="none";
+            })
+            
+        }
+        open_Edit_Emp()
+    </script>
 </body>
 
 </html>

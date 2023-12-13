@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $father = $_POST['father'];
         $class = $_POST['class'];
         $eng = $_POST['eng'];
-        $maxeng = $_POST['maxeg'];
+        $maxeng = $_POST['maxeng'];
         $Hindi = $_POST['hindi'];
         $maxhindi = $_POST['maxhindi'];
         $math = $_POST['math'];
