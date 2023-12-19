@@ -39,6 +39,12 @@ require 'php/Db.php';
                     JIET
                 </h3>
                 <img src="images/logois.jpg" alt="" style="width: 50px;">
+                <h2>
+                    <span class="material-symbols-outlined" style="font-size: 30px;">
+                        person_apron
+                        </span>
+                        <br>
+                Principal</h2>
                 <ul>
                     <li class="key" onclick="show(0)"><span class="material-symbols-outlined icon">
                             home
@@ -60,12 +66,6 @@ require 'php/Db.php';
                         </span><span>Result</span></li>
 
 
-                    <!-- <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
-                            person
-                        </span><span>profile</span></li>
-                    <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
-                            logout
-                        </span><span>Log Out</span></li> -->
 
                 </ul>
             </div>
@@ -373,17 +373,20 @@ require 'php/Db.php';
                 overflow: scroll;
             }
 
-            .home{
+            .home {
                 display: block;
             }
-            .Home_data{
+
+            .Home_data {
                 position: relative;
             }
-            .Home_data>img{
+
+            .Home_data>img {
                 width: 350px;
                 z-index: -2;
             }
-            .Home_data>div{
+
+            .Home_data>div {
                 width: 100%;
                 position: absolute;
                 top: 5px;
@@ -391,7 +394,8 @@ require 'php/Db.php';
                 justify-content: space-around;
                 flex-wrap: wrap;
             }
-            .Home_data>div>div{
+
+            .Home_data>div>div {
                 width: 220px;
                 height: 140px;
                 margin-top: 30px;
@@ -400,16 +404,19 @@ require 'php/Db.php';
                 text-align: center;
                 color: white;
             }
-            .Home_data>div>:nth-child(1){
+
+            .Home_data>div>:nth-child(1) {
                 background-color: rgb(9, 9, 36);
             }
-            .Home_data>div>:nth-child(2){
+
+            .Home_data>div>:nth-child(2) {
                 background-color: rgb(35, 2, 41);
             }
-            .Home_data>div>:nth-child(3){
+
+            .Home_data>div>:nth-child(3) {
                 background-color: rgb(5, 23, 42);
             }
-            
+
 
 
             .closebtn {
@@ -1544,11 +1551,11 @@ require 'php/Db.php';
         </div>
     </div>
     <script>
-        function fetch_Emp_up_modal(){
-            let open_btn= document.getElementsByClassName('Emp_up');
-            let i=0;
-            while(i<open_btn.length){
-                open_btn[i].addEventListener('click', function(e){
+        function fetch_Emp_up_modal() {
+            let open_btn = document.getElementsByClassName('Emp_up');
+            let i = 0;
+            while (i < open_btn.length) {
+                open_btn[i].addEventListener('click', function (e) {
                     let tr = e.target.parentNode.parentNode;
                     let up_Emp_id = tr.getElementsByTagName('td')[4].innerHTML;
                     let Emp_name = tr.getElementsByTagName('td')[0].innerHTML;
@@ -1560,27 +1567,27 @@ require 'php/Db.php';
                     let Emp_mobile_inp = document.getElementById('up_Emp_mobile').value = Mobile_no;
                     let Emp_Email_inp = document.getElementById('up_Emp_Email').value = Email;
                     let Emp_password_inp = document.getElementById('up_Emp_pass').value = password;
-                    console.log(up_Emp_id,Emp_name,Mobile_no,Email,password)
+                    console.log(up_Emp_id, Emp_name, Mobile_no, Email, password)
                 })
                 i++;
             }
         }
         fetch_Emp_up_modal()
-        function open_Edit_Emp(){
-            const close_btn= document.getElementById('Edit_close_btn')
-            const Edit_modal= document.getElementById('Edit_Emp');
-            let open_btn= document.getElementsByClassName('Emp_up');
-            let i=0;
-            while(i<open_btn.length){
-                open_btn[i].addEventListener('click',function(){
-                    Edit_modal.style.display="block";
+        function open_Edit_Emp() {
+            const close_btn = document.getElementById('Edit_close_btn')
+            const Edit_modal = document.getElementById('Edit_Emp');
+            let open_btn = document.getElementsByClassName('Emp_up');
+            let i = 0;
+            while (i < open_btn.length) {
+                open_btn[i].addEventListener('click', function () {
+                    Edit_modal.style.display = "block";
                 });
                 i++;
             }
-            close_btn.addEventListener('click', function(){
-                Edit_modal.style.display="none";
+            close_btn.addEventListener('click', function () {
+                Edit_modal.style.display = "none";
             })
-            
+
         }
         open_Edit_Emp()
     </script>

@@ -15,7 +15,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             echo $Emp_id, $username,$mobile,$Email,$pass;
         };
         
-
     }
 }
 ?>

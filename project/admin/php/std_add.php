@@ -16,6 +16,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
      $maxphy = $_POST['maxphy'];
      $chem = $_POST['chem'];
      $maxchem = $_POST['maxchem'];
+     $addby =  $_SESSION['username'];    
      $exist = "SELECT * FROM `student` WHERE rollno = $std_id ";
      $stdexist = mysqli_query($conn,$exist);
      $num = mysqli_num_rows($stdexist);
@@ -44,7 +45,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         }
      }
      else{
-         $sql = "INSERT INTO `student` (`id`, `rollno`, `name`, `father`, `class`, `eng`, `hindi`, `math`, `phy`, `chem`, `maxeng`, `maxhindi`, `maxmath`, `maxphy`, `maxchem`, `editby`) VALUES (NULL, '$std_id', '$username', '$father', '$class', '$eng', '$Hindi', '$math', '$phy', '$chem', '$maxeng', '$maxhindi', '$maxmath', '$maxphy', '$maxchem', 'udit')";
+         $sql = "INSERT INTO `student` (`id`, `rollno`, `name`, `father`, `class`, `eng`, `hindi`, `math`, `phy`, `chem`, `maxeng`, `maxhindi`, `maxmath`, `maxphy`, `maxchem`, `editby`) VALUES (NULL, '$std_id', '$username', '$father', '$class', '$eng', '$Hindi', '$math', '$phy', '$chem', '$maxeng', '$maxhindi', '$maxmath', '$maxphy', '$maxchem', '$addby')";
        $result = mysqli_query($conn,$sql);
        if($result){
         if($result){
