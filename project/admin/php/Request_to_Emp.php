@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   //   <strong>  !</strong> 
   //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   // </div>';
-  echo '<div class="noti_div pending" id="noti_div">
+  echo '<div class="noti_div pending" id="noti_div" style="margin-top: 30px;">
   <div class="noti_div2">
       <div class="error">
           <h3  class = "exist" style ="padding-left: 50px;">
@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $sql = "INSERT INTO `employes` (`name`, `mobile`, `email`, `password`, `del`) VALUES ('$username', '$mobile', '$email', '$password', ' $admin_id')";
     $result = mysqli_query($conn,$sql);
    if($result){
-   echo '<div class="noti_div succesfully" id="noti_div">
+   echo '<div class="noti_div succesfully" id="noti_div" style="margin-top: 30px;">
    <div class="noti_div2">
        <div class="error">
            <h3>

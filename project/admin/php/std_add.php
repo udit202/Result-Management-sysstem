@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         while($row=mysqli_fetch_assoc($stdexist)){
             if($row['rollno']==$std_id){
                 // echo $row['name'];
-                echo '<div style = "position: relative;  margin-top: 5px;">
+                echo '<div style = "position: relative;  margin-top: 30px;">
                 <div class="noti_div pending" id="noti_div">
   <div class="noti_div2">
       <div class="error">
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
        $result = mysqli_query($conn,$sql);
        if($result){
         if($result){
-            echo '<div class="noti_div succesfully" id="noti_div">
+            echo '<div class="noti_div succesfully" id="noti_div" style="margin-top: 30px;">
             <div class="noti_div2">
                 <div class="error">
                     <h3>

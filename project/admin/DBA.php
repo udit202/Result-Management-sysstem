@@ -1,3 +1,4 @@
+
 <?php
 require 'php/Db.php';
  ?>
@@ -44,7 +45,9 @@ require 'php/Db.php';
                         person_apron
                         </span>
                         <br>
-                Principal</h2>
+                        <?php
+                // echo $_SESSION['admin'];
+                ?></h2>
                 <ul>
                     <li class="key" onclick="show(0)"><span class="material-symbols-outlined icon">
                             home

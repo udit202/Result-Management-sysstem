@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $sql ="UPDATE `employes` SET `name` = '$username', `mobile` = '$mobile', `email` = '$Email', `password` = '$pass' WHERE `employes`.`del` = '$Emp_id'";
         $result= mysqli_query($conn,$sql);
         if($result){
-            echo $Emp_id, $username,$mobile,$Email,$pass;
+            // echo $Emp_id, $username,$mobile,$Email,$pass;
         };
         
     }

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,9 +117,9 @@
 
         }
     </style>
-    <div class="container" >
+    <div class="container">
 
-    </div >
+    </div>
     <style>
         .btn_div{
             width: 98%;
@@ -163,55 +166,49 @@
                 <form action="<?php
         echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <br>
-                    <label for="rollno">RollNo:</label>
-                    <input type="text" id="rollno" name="stdRollno" placeholder="Please Enter your RollNo" required>
+                    <label for="rollno">Mobile No:</label>
+                    <input type="text" id="rollno" name="admin_mobile" placeholder="Please Enter your Mobile No" required>
                     <br><br>
-                    <label for="fname">Father Name:</label>
-                    <input type="text" name="fname" id="fname" placeholder="Please Enter your Father Name" required>
+                    <label for="fname">password:</label>
+                    <input type="text" name="password" id="fname" placeholder="Please Enter your password" required>
                     <br>
                     <p style="color: red;">
-                        <?php
-                    require 'php/Db.php';
-                    if($_SERVER["REQUEST_METHOD"]=="POST"){
-                        if(isset($_POST['stdRollno']))
-                        $Rollno = $_POST['stdRollno'];
-                    $father = $_POST['fname'];
-                    $sql = "SELECT * FROM student WHERE rollno = '$Rollno'";
-                    $exist = mysqli_query($conn, $sql);
-                    $num = mysqli_num_rows($exist);
-                    if($num==1){
-                        $sql = "SELECT *FROM student WHERE rollno = '$Rollno' AND father = '$father'";
-                        $result = mysqli_query($conn, $sql);
-                         $user = mysqli_num_rows($result);
-                       if($user==1){
-                        $row=mysqli_fetch_assoc($result);
-                        session_start();
-                        $_SESSION['exist']=true;
-                        $_SESSION['rollno']= $row['rollno'];
-                        $_SESSION['name']= $row['name'];
-                        $_SESSION['father']= $row['father'];
-                        $_SESSION['class']= $row['class'];
-                        $_SESSION['eng']= $row['eng'];
-                        $_SESSION['maxeng']= $row['maxeng'];
-                        $_SESSION['hindi']= $row['hindi'];
-                        $_SESSION['maxhindi']= $row['maxhindi'];
-                        $_SESSION['math']= $row['math'];
-                        $_SESSION['maxmath']= $row['maxmath'];
-                        $_SESSION['phy']=$row['phy'];
-                        $_SESSION['maxphy']=$row['maxphy'];
-                        $_SESSION['chem']=$row['chem'];
-                        $_SESSION['maxchem']= $row['maxchem'];
-                        header("location: result.php");
-                              }
-                              else{
-                                echo "Wrong Father name";
-                              }
-                    }
-                    else{
-                        echo " Student not exist";
-                    }
-                    }
-                    ?>
+                    <?php
+                    
+        require 'php/Db.php';
+        if($_SERVER["REQUEST_METHOD"]=="POST"){
+          if(isset($_POST['admin_mobile'])){
+            
+            $usermobile = $_POST['admin_mobile'];
+            $password = $_POST['password'];
+            $sql = "SELECT *FROM admin WHERE mobile = '$usermobile'";
+            $exist = mysqli_query($conn, $sql);
+            $num = mysqli_num_rows($exist);
+            if($num >0){
+              $admm = "SELECT *FROM admin WHERE mobile = '$usermobile' AND password = '$password'";
+            $result = mysqli_query($conn, $admm);
+            $user = mysqli_num_rows($result);
+            if($user ==1){           
+              $row=mysqli_fetch_assoc($result);           
+              $_SESSION['admin']=true;
+            //   $_SESSION['username']= $row['name'];
+            header('location:login.php');
+    
+            }
+            else{
+                echo " Password Incorrect";
+            }
+
+            }
+            else{
+              echo " Sorry User Not exist";
+            }
+            
+    
+          }
+        }
+    
+        ?>
                     </p>
 
                     <div>
