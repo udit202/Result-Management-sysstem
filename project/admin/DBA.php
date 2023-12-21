@@ -1,6 +1,11 @@
-
 <?php
 require 'php/Db.php';
+session_start();
+if(!isset($_SESSION['admin'])|| $_SESSION['admin']!=true)
+{
+    header('location:adminlogin.php');
+
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +51,7 @@ require 'php/Db.php';
                         </span>
                         <br>
                         <?php
-                // echo $_SESSION['admin'];
+                echo $_SESSION['username'];
                 ?></h2>
                 <ul>
                     <li class="key" onclick="show(0)"><span class="material-symbols-outlined icon">
@@ -67,11 +72,23 @@ require 'php/Db.php';
                     <li class="key" onclick="show(5)"><span class="material-symbols-outlined icon">
                             breaking_news_alt_1
                         </span><span>Result</span></li>
-
-
-
+                        <li class=" key logbtn"><span class="material-symbols-outlined icon">
+                        <a href="DBAlogout.php" class="logout">logout</a>
+                        </span><span><a href="DBAlogout.php" class="logout">LogOut</a></span></a></li>
                 </ul>
             </div>
+            <style>
+                .logout{
+                                text-decoration: none;
+                                color: navy;
+                                border-radius: 25px;
+                            }
+                            .logout:hover,.key:hover{
+                                
+                                background-color: navy;
+                                color: white;
+                            }
+            </style>
         </div>
         <div class="heading_div">
             <h2>JIND INSTITUTE OF ENGINEERING AND TECHNOLOGY</h2>

@@ -5,6 +5,7 @@ if(!isset($_SESSION['exist'])|| $_SESSION['exist']!=true)
     header('location:std.php');
 
 }
+else{
 $std_id = $_SESSION['rollno'];
      $username = $_SESSION['name'];
      $father = $_SESSION['father'];
@@ -20,6 +21,7 @@ $std_id = $_SESSION['rollno'];
      $chem = $_SESSION['chem'];
      $maxchem = $_SESSION['maxchem'];  
     //  echo $std_id ,$username,$username,$class,$eng,$maxeng,$Hindi,$maxhindi,$math,$maxmath,$phy,$maxphy,$chem,$maxchem;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
