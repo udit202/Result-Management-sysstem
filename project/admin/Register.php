@@ -182,7 +182,7 @@
             <label for="regConfirmPassword">Confirm Password</label>
             <input type="password" id="regConfirmPassword" name="confirmPassword" required>
           </div>
-          <p id="message" class="message"></p><br>
+          <p id="message" class="message"></p>
           <button type="submit" class="login">Register</button>
         </form>
       </div>
@@ -263,6 +263,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       return false;
     } else {
       // If passwords match, clear any previous error message
+      document.getElementById("message").style.display="none";
       document.getElementById("message").innerHTML = "";
       // Allow form submission
       return true;
