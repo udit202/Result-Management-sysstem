@@ -159,7 +159,7 @@
             <input type="password" id="loginPassword" required name="loginpass">
           </div>
           <p>
-            <!-- <?php
+            <?php
             require 'php/Db.php';
             if($_SERVER["REQUEST_METHOD"]=="POST"){
               if(isset($_POST['user'])){
@@ -194,7 +194,7 @@
               }
             }
         
-            ?> -->
+            ?>
           </p>
           <button type="submit" class="login">Log In</button>
         </form>

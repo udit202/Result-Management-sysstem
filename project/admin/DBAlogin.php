@@ -170,7 +170,7 @@ session_start();
                     <input type="text" id="rollno" name="admin_mobile" placeholder="Please Enter your Mobile No" required>
                     <br><br>
                     <label for="fname">password:</label>
-                    <input type="text" name="password" id="fname" placeholder="Please Enter your password" required>
+                    <input type="password" name="password" id="fname" placeholder="Please Enter your password" required>
                     <br>
                     <p style="color: red;">
                     <?php

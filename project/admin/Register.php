@@ -14,100 +14,6 @@
 </head>
 
 <body>
-  <!-- <style>
-
-        body {
-          font-family: Arial, sans-serif;
-          background-color: #f5f5f5;
-          text-align: center;
-          padding: 20px;
-        }
-    
-        .btn_div {
-          text-align: right;
-    
-        }
-    
-        .form-container {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 30px;
-        }
-    
-        form {
-          background-color: #fff;
-          border-radius: 9px;
-          padding: 20px;
-          width: 380px;
-          padding-right: 40px;
-          padding-top: 0px;
-          margin-top: 0px;
-        }
-    
-        h2 {
-          margin-top: 0px;
-          color: navy;
-        }
-    
-        label {
-          display: block;
-          margin-bottom: 5px;
-          font-size: 14px;
-          font-weight: bold;
-        }
-    
-        input {
-          width: 100%;
-          padding: 8px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-        }
-    
-        .login {
-          width: 105%;
-          padding: 10px;
-          background-color: navy;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-    
-        .login:hover {
-          background-color: rgb(46, 24, 45);
-        }
-    
-        img {
-          margin-top: 5px;
-          width: 50px;
-        }
-    
-        .log {
-          border: 2px solid navy;
-          padding: 6px 17px;
-          border-radius: 25px;
-          font-size: 18px;
-    
-        }
-        .log:hover{
-          background-color: navy;
-          color: white;
-    
-        }
-    
-       a{
-        text-decoration: none;
-       }
-       a:hover{
-        color: white;
-       }
-       .noti{
-        width: 98%;
-        position: absolute;
-        top: 5px;
-       }
-      </style> -->
       <style>
         .container {
           width: 100%;
@@ -230,6 +136,10 @@
           background-color: red;
           box-shadow: rgb(238, 239, 240) 0px 20px 30px -10px;
         }
+        .message{
+          color: red;
+          font-size: 16px;
+        }
       </style>
   <div class="container">
 
@@ -243,12 +153,12 @@
     <div>
       <div class="form-container">
         <form id="registrationForm" action="<?php
-            echo $_SERVER['PHP_SELF']; ?>" method="post">
+            echo $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="return validateForm()">
           <img src="images/logois.jpg" alt=""> <br>
           <h2>Registration</h2>
           <div>
     
-            <input type="text" id="admin" name="admin" hidden>
+            <input type="text" id="admin" name="admin" hidden >
           </div>
           <div>
             <label for="regUsername">Username</label>
@@ -272,7 +182,7 @@
             <label for="regConfirmPassword">Confirm Password</label>
             <input type="password" id="regConfirmPassword" name="confirmPassword" required>
           </div>
-          <span id="message"></span><br>
+          <p id="message" class="message"></p><br>
           <button type="submit" class="login">Register</button>
         </form>
       </div>
@@ -310,10 +220,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             </div>
         </div>
       </div>';
-  //        echo '<div class="alert alert-danger alert-dismissible fade show noti" role="alert" style="z-index: 5;">
-  //    <strong> '.$row['name'].' !</strong> You Already Register So go on <a href="login.php">Login </a>Page. or Contact with your HOD for Request Acceptness.
-  //    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  //  </div>';
        }
      }
     }
@@ -337,15 +243,47 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       </div>
     </div>';
 
-    //   echo '<div class="alert alert-success alert-dismissible fade show noti" role="alert" style="z-index: 5;">
-    //   <strong>succesfully sended!</strong> Your request succesfully sended to your HOD.
-    //   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    // </div>';
     }
     }
     } 
   }
 ?>
+
+<script>
+  function validateForm() {
+    // Get the values from the password and confirm password fields
+    var password = document.getElementById("regPassword").value;
+    var confirmPassword = document.getElementById("regConfirmPassword").value;
+
+    // Check if the passwords match
+    if (password !== confirmPassword) {
+      // If passwords don't match, display an error message
+      document.getElementById("message").innerHTML = "Passwords do not match";
+      // Prevent form submission
+      return false;
+    } else {
+      // If passwords match, clear any previous error message
+      document.getElementById("message").innerHTML = "";
+      // Allow form submission
+      return true;
+    }
+  }
+</script>
+<script>
+  function capture(length){
+    let result='';
+    const cha='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const chalen=cha.length;
+    let counter=0;
+    while(counter<length){
+        result=result+cha.charAt(Math.floor(Math.random()*chalen));
+        counter=counter+1;
+    };
+    return result;
+}
+let cap=capture(5);
+document.getElementById('admin').value=cap;
+</script>
 <script>
   function notification() {
             let btn = document.getElementById("not_btn");

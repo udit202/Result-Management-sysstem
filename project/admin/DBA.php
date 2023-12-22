@@ -73,8 +73,8 @@ if(!isset($_SESSION['admin'])|| $_SESSION['admin']!=true)
                             breaking_news_alt_1
                         </span><span>Result</span></li>
                         <li class=" key logbtn"><span class="material-symbols-outlined icon">
-                        <a href="DBAlogout.php" class="logout">logout</a>
-                        </span><span><a href="DBAlogout.php" class="logout">LogOut</a></span></a></li>
+                        <a href="Logout.php" class="logout">logout</a>
+                        </span><span><a href="Logout.php" class="logout">LogOut</a></span></a></li>
                 </ul>
             </div>
             <style>
