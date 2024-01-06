@@ -10,7 +10,12 @@ session_start();
     <title>Document</title>
 </head>
 
-<body>
+<body onloadeddata="process()" >
+    <script>
+        function process(){
+            window.location.href='load.html'
+        }
+    </script>
     <style>
         .container {
             width: 100%;

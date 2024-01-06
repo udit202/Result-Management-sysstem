@@ -28,11 +28,13 @@ if(!isset($_SESSION['admin'])|| $_SESSION['admin']!=true)
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 </head>
-<style>
-
-</style>
-
-<body>
+<body onloadeddata="process()">
+<script>
+    function process(){
+            window.location.href='load.html'
+        }
+</script>
+    
     <style>
         #not_btn {
             cursor: pointer;

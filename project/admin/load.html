@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 100%;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container>div{
+        width: 50px;
+        height: 50px;
+        border-top: 5px solid navy;
+        border-radius: 25px;
+        animation: mymove .3s infinite;
+        /* animation: change_col .1s infinite; */
+    }
+    @keyframes mymove {
+  from {rotate: 0deg;
+    border-color: red;}
+  to {rotate: 4633720deg;
+    border-color: navy;}
+}
+
+</style>
+<body>
+    <div class="container">
+        <div>
+
+        </div>
+    </div>
+</body>
+</html>

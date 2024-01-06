@@ -56,6 +56,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
        </div>
    </div>
  </div>';
+ $sql ="DELETE FROM `request` WHERE `request`.`mobile` = $del_id";
+        mysqli_query($conn,$sql);
+
    }
    }
    } 
