@@ -1,4 +1,7 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -14,11 +17,11 @@
   <style>
     .container {
       width: 100%;
-      height: 600px;
-      background-image: url(images/2157094.webp);
+      height: 640px;
+      background-image: url(images/wp5718447.webp);
       background-repeat: no-repeat;
       background-size: cover;
-      filter: blur(20px);
+      /* filter: blur(20px); */
     }
 
     .setform {

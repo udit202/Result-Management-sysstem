@@ -16,10 +16,10 @@ session_start();
         .container {
             width: 100%;
             height: 600px;
-            background-image: url(images/2157094.webp);
+            background-image: url(admin/images/wp3842278.webp);
             background-repeat: no-repeat;
             background-size: cover;
-            filter: blur(20px);
+            /* filter: blur(20px); */
         }
 
         .maindiv {
@@ -43,7 +43,7 @@ session_start();
             width: 300px;
             height: auto;
             padding: 15px;
-            background-image: url(images/2157094.webp);
+            background-image: url(images/wp5718447.webp);
             background-size: cover;
             backdrop-filter: blur(50px);
             text-align: center;
@@ -127,6 +127,7 @@ session_start();
     <style>
         .btn_div{
             width: 98%;
+            background-color: black;
             position: absolute;
             top: 0px;
             height: 60px;
